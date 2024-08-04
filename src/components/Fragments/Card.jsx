@@ -1,42 +1,32 @@
-import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
 import {
   Stack,
   Heading,
-  Divider,
-  ButtonGroup,
-  Button,
   Text,
   Image,
+  Flex,
+  Card,
+  CardBody,
 } from "@chakra-ui/react";
 
-import MyButton from "../Elements/MyButton";
-
-function CardFrag({ title, desc }) {
+function CardFrag({ title, desc, src, mt }) {
   return (
-    <Card maxW="sm">
+    <Card maxW="sm" mt={mt}>
       <CardBody>
-        <Image
-          src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-          alt="Green double couch with wooden legs"
-          borderRadius="lg"
-        />
+        <Flex justifyContent="center">
+          <Image
+            src={src}
+            alt="Green double couch with wooden legs"
+            borderRadius="lg"
+            width={"200px"}
+            height={"300px"}
+          />
+        </Flex>
+
         <Stack mt="6" spacing="3">
           <Heading size="md">{title}</Heading>
           <Text>{desc}</Text>
         </Stack>
       </CardBody>
-      <Divider />
-      <CardFooter>
-        <ButtonGroup spacing="2">
-          <MyButton colorScheme="blue">Buy Now</MyButton>
-          <MyButton
-            variant="outline"
-            colorScheme="white"
-            color="blue.600"
-            border="2px"
-          />
-        </ButtonGroup>
-      </CardFooter>
     </Card>
   );
 }
