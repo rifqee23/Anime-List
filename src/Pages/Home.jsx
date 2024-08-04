@@ -1,4 +1,4 @@
-import { Box, AlertIcon, Grid, Spinner, Alert } from "@chakra-ui/react";
+import { Box, AlertIcon, Grid, Spinner, Alert, Flex } from "@chakra-ui/react";
 import Card from "../components/Fragments/Card";
 import { useEffect, useState } from "react";
 import { getCards } from "../services/card.service";
@@ -26,11 +26,16 @@ function Home() {
         setLoading(false);
       }
     };
+
     fetchData();
   }, []);
 
   if (loading) {
-    return <Spinner />;
+    return (
+      <Flex height={"100vh"} alignItems={"center"} justifyContent={"center"}>
+        <Spinner size={"xl"} />;
+      </Flex>
+    );
   }
   if (error) {
     return (
@@ -50,14 +55,18 @@ function Home() {
         autoFlow="dense"
         placeContent={{ sm: "center", md: "center", lg: "initial" }}
       >
-        {filteredProducts.map((item) => (
-          <Card
-            key={item.mal_id}
-            src={item.images.jpg.image_url}
-            title={item.title}
-            mt="4rem"
-          />
-        ))}
+        {filteredProducts.length === 0 ? (
+          <Alert color={"red"}>No results found</Alert>
+        ) : (
+          filteredProducts.map((item) => (
+            <Card
+              key={item.mal_id}
+              src={item.images.jpg.image_url}
+              title={item.title}
+              mt="4rem"
+            />
+          ))
+        )}
       </Grid>
     </Box>
   );
